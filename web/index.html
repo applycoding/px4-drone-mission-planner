@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Survey grid — PX4 mission planner</title>
+    <link rel="stylesheet" href="/static/vendor/leaflet.css" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div>
+        <p class="kicker">PX4 mission planner</p>
+        <h1>Survey grid</h1>
+      </div>
+      <p id="vehicle-pill" class="pill">Connecting…</p>
+    </header>
+    <div class="layout">
+      <section class="panel" aria-label="Mission plan">
+        <p class="lede">
+          Draw a field, preview the lawnmower, then check the fence and the
+          return-to-home reserve before arming.
+        </p>
+        <div class="toolbar">
+          <button type="button" id="sample">Sample field</button>
+          <button type="button" id="place-home">Place home</button>
+          <button type="button" id="undo">Undo</button>
+          <button type="button" id="clear">Clear</button>
+        </div>
+        <p id="corner-count" class="meta">No corners yet. Click the map to drop them.</p>
+        <p id="home-readout" class="meta">Home not placed.</p>
+        <div class="fields">
+          <label>Spacing <span>m</span><input id="spacing" type="number" min="1" max="500" step="1" value="20" /></label>
+          <label>Altitude <span>m</span><input id="altitude" type="number" min="1" max="120" step="1" value="25" /></label>
+          <label>Speed <span>m/s</span><input id="speed" type="number" min="0.5" max="30" step="0.5" value="5" /></label>
+          <label>Heading <span>deg</span><input id="angle" type="number" min="0" max="360" step="1" value="90" /></label>
+          <label>Margin <span>m</span><input id="margin" type="number" min="0" max="100" step="1" value="0" /></label>
+          <label>Battery <span>%</span><input id="battery" type="number" min="0" max="100" step="1" value="80" /></label>
+        </div>
+        <p id="model-note" class="note">Loading the energy model…</p>
+        <div class="actions">
+          <button type="button" id="preview" class="primary">Preview path</button>
+          <button type="button" id="launch" class="primary" disabled>Arm and start</button>
+          <button type="button" id="rth" class="wide">Check return reserve</button>
+        </div>
+        <p id="stale" class="note" hidden>The inputs changed. Preview again before launch.</p>
+        <div id="report" aria-live="polite">
+          <p id="empty" class="empty">Draw at least three corners and place home inside the field.</p>
+        </div>
+        <p class="footnote">
+          Portfolio demo. The default vehicle is fake and does not transmit.
+          Energy rates are placeholders, not flight-test data.
+        </p>
+      </section>
+      <div id="map" role="application" aria-label="Survey map"></div>
+    </div>
+    <script src="/static/vendor/leaflet.js"></script>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

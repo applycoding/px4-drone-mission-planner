@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "px4-drone-mission-planner"
+version = "0.1.0"
+description = "Survey-grid mission planner for PX4, with a MAVSDK run controller."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Arpan Bom", email = "applycoding@gmail.com" }]
+classifiers = ["License :: OSI Approved :: MIT License"]
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn>=0.32",
+]
+
+[project.optional-dependencies]
+sitl = ["mavsdk>=3.6"]
+dev = ["pytest>=8.3", "httpx>=0.27"]
+
+[project.scripts]
+survey-planner = "mission_planner.api:main"
+survey-planner-sitl = "mission_planner.sitl:main"
+
+[tool.setuptools.packages.find]
+include = ["mission_planner*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
